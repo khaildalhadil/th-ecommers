@@ -23,3 +23,8 @@ export const insertProductSchema = z.object({
   banner: z.string().nullable(),
   price: currency,
 })
+
+export const signInFormSchema = z.object({
+  email: z.string().email('الايميل غير صالح'),
+  password: z.string().min(6, 'كلمة المرور لازم تكون اكثر من 6 احرف')
+})
