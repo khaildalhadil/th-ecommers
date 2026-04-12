@@ -15,7 +15,7 @@ export async function signInWithCredentials(prevState: unknown ,data: FormData) 
     })
     
     await signIn("credentials", user)
-    return {success: true, message: 'Signed in successfully'}
+    return {success: true, message: 'تم تسجيل الدخول بنجاح'}
 
   } catch(err) {
 
@@ -24,7 +24,7 @@ export async function signInWithCredentials(prevState: unknown ,data: FormData) 
     }
 
     console.error("Error signing in", err)  
-    return {success: false, message: 'Invalid email or password'}
+    return {success: false, message: 'بريد إلكتروني أو كلمة مرور غير صالحة'}
 
   }
 }
@@ -32,7 +32,7 @@ export async function signInWithCredentials(prevState: unknown ,data: FormData) 
 export async function signOutUser() {
   try {
     await signOut()
-    return {success: true, message: 'Signed out successfully'}
+    return {success: true, message: 'تم تسجيل الخروج بنجاح'}
   } catch(err) {
     console.error("Error signing out", err)  
     return {success: false, message: 'Error signing out'}
