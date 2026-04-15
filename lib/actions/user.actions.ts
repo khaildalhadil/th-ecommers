@@ -32,9 +32,9 @@ export async function signInWithCredentials(prevState: unknown ,data: FormData) 
 export async function signOutUser() {
   try {
     await signOut()
-    return {success: true, message: 'تم تسجيل الخروج بنجاح'}
+    // return {success: true, message: 'تم تسجيل الخروج بنجاح'}
   } catch(err) {
     console.error("Error signing out", err)  
-    return {success: false, message: 'Error signing out'}
+    // return {success: false, message: 'Error signing out'}
   }
 }
