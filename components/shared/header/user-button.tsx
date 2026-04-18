@@ -9,6 +9,8 @@ const  UserButton = async () => {
 
   const session = await auth();
   console.log(session)
+  console.log(Boolean(session))
+
   
 
   if (!session) {
