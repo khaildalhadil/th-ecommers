@@ -28,3 +28,13 @@ export const signInFormSchema = z.object({
   email: z.string().email('الايميل غير صالح'),
   password: z.string().min(6, 'كلمة المرور لازم تكون اكثر من 6 احرف')
 })
+
+export const signUpFormSchema = z.object({
+  name: z.string().min(3, 'الاسم لازم يكون اكثر من 3 احرف'),
+  email: z.string().email('الايميل غير صالح'),
+  password: z.string().min(6, 'كلمة المرور لازم تكون اكثر من 6 احرف'),
+  confirmPassword: z.string().min(6, 'كلمة المرور لازم تكون اكثر من 6 احرف')
+}).refine(data => data.password === data.confirmPassword, {
+  message: 'كلمتي المرور غير متطابقتين',
+  path: ['confirmPassword']
+})

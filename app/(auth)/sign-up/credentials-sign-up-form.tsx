@@ -2,30 +2,43 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { signInWithCredentials } from "@/lib/actions/user.actions";
+import { signUpUser } from "@/lib/actions/user.actions";
 import Link from "next/link";
 import { useActionState } from "react";
-import {  useFormStatus } from "react-dom";
+import { useFormStatus } from "react-dom";
 
-const CredentialsSignInForm = () => {
+const CredentialsSignUpForm = () => {
 
-  const [data, action] = useActionState(signInWithCredentials , {
+  const [data, action] = useActionState(signUpUser , {
     success: false,
     message: ''
   }) 
 
-  const SignUpButton = () => {
+  const SignInButton = () => {
     const { pending } = useFormStatus();
 
     return (
-      <Button disabled={pending} className="w-full" >
-        {pending ? "جاري تسجيل الدخول..." : "تسجيل الدخول"}
+      <Button disabled={pending} className="w-full" type="submit" >
+        {pending ? "جاري إنشاء الحساب..." : "إنشاء حساب"}
       </Button>
     )
   }
 
   return (
     <form className="space-y-6" action={action}>
+      <div>
+        <Label htmlFor="name" className="block text-sm font-medium">
+          الاسم
+        </Label>
+        <Input
+          id="name"
+          name="name"
+          type="text"
+          required
+          className="mt-1 block w-full"
+          autoComplete="name"
+        />
+      </div>
       <div>
         <Label htmlFor="email" className="block text-sm font-medium">
           البريد الإلكتروني
@@ -52,22 +65,36 @@ const CredentialsSignInForm = () => {
           autoComplete="current-password"
         />
       </div>
+      <div>
+        <Label htmlFor="confirmPassword" className="block text-sm font-medium">
+          تأكيد كلمة المرور
+        </Label>
+        <Input
+          id="confirmPassword"
+          name="confirmPassword"
+          type="password"
+          required
+          className="mt-1 block w-full"
+          autoComplete="current-password"
+        />
+      </div>
 
       {data && !data.success && (
         <div className="text-sm text-red-600">{data.message}</div>
       )}
 
       <div>
-        <SignUpButton />
+        <SignInButton />
         <div className="text-sm text-center text-muted-foreground mt-5">
-          لا تملك حسابًا؟{" "}
-          <Link href="/sign-up" className="text-primary hover:underline">
-            إنشاء حساب
+          لديك حساب بالفعل؟{" "}
+          <Link href="/sign-in" className="text-primary hover:underline">
+            تسجيل دخول
           </Link>
         </div>
+        
       </div>
     </form>
   );
 }
  
-export default CredentialsSignInForm;
+export default CredentialsSignUpForm;
